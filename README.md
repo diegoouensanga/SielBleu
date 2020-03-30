@@ -11,7 +11,7 @@ Bien commenter chaque commit !
 
 1.Cloner le répertoire sur votre machine en local :
 ```bash
-git clone git@github.com:Tomsanitas/Uprovement.git
+git clone git@github.com:diegoouensanga/SielBleu.git
 ```
 
 2.Installer react
