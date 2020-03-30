@@ -2,8 +2,8 @@
 
 # Règles pour le code :
 
-Nom des variables : Anglais et Majuscules (UserClass)
-Nom des fonctions : minuscules et verbe (searchClass())
+Nom des variables : Francais Majuscules (DescriptionMetier)
+Nom des fonctions : Francais maj 
 
 Bien commenter chaque commit ! 
 
