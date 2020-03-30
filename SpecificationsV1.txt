@@ -1,0 +1,21 @@
+
+
+Spécifications min V1
+
+- Créer un nouveau diagnostic V
+(- Avoir accès à l'historique des diagnostics éffectués)
+
+(- Préremplir les infos de l'entreprise)
+
+- Ajouter un métier
+
+- Ajouter une nouvelle tache
+- Prendre en photo une tache
+- Ignorer la prise de photo (cas où appareil photo interdit)
+
+- Sélectionner les sollicitations
+
+- Générer le diagnostic
+- Générer l'échauffement
+- Revenir à ajouter une tache
+- Revenir à ajouter un métier
