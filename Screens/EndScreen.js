@@ -1,13 +1,7 @@
-import React, { useState, useEffect} from 'react';
-import { Camera } from 'expo-camera';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, Image, CheckBox } from 'react-native-elements';
-import LinearGradient from 'react-native-linear-gradient';
-import { AuthSession } from 'expo';
-import {ProcessLine} from '../Components/ProcessLine'
+import React from 'react';
+import { View, StyleSheet, Dimensions } from 'react-native';
+import { Image } from 'react-native-elements';
+import Button from 'apsl-react-native-button'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -15,24 +9,59 @@ const windowHeight = Dimensions.get('window').height;
 export function EndScreen({ navigation }) {
     return (
       <View style={styles.container}>
-      <ProcessLine/>
+      <View style={styles.top_container}>
+          <View style={{width:'20%',padding:5}}>
+            <Button 
+            style={{backgroundColor: '#0c77bd'}}
+            textStyle={{fontSize: 13,color:'white'}}
+            onPress={() => navigation.navigate('Entreprise')}>Entreprise</Button>
+          </View>
+          <View style={{width:'19%',padding:5}}>
+            <Button 
+            style={{backgroundColor: '#0c77bd'}}
+            textStyle={{fontSize: 19,color:'white'}}
+            onPress={() => navigation.navigate('Métier')}>Métier</Button>
+          </View>
+          <View style={{width:'19%',padding:5}}>
+            <Button 
+            style={{backgroundColor: '#0c77bd'}}
+            textStyle={{fontSize: 17,color:'white'}}
+            onPress={() => navigation.navigate('Taches')}>Taches</Button>
+          </View>
+          <View style={{width:'20%',padding:5}}>
+            <Button 
+            style={{backgroundColor: '#0c77bd'}}
+            textStyle={{fontSize: 10,color:'white'}}
+            onPress={() => navigation.navigate('Sollicitations')}>Sollicitations</Button>
+          </View>
+          <View style={{width:'21%',padding:5}}>
+            <Button 
+            style={{backgroundColor: '#0c77bd'}}
+            textStyle={{fontSize: 11,color:'white'}}
+            onPress={() => navigation.navigate('Fin')}>Générations documents</Button>
+          </View>
+      </View>
       <View style={styles.centrage}>
         <Image
         source={{uri: "https://files.sbcdnsb.com/images/vpli8sqozemg/content/1500372150/298192/100/logssb.gif"}}
         resizeMode = 'cover'
         style={{ width: windowWidth * 0.3, height: windowHeight*0.1 }}/>
-        <Button
-        title="Ajouter un métier"
-        onPress={() => navigation.navigate('Métier')}/>
-        <Button
-        title="Ajouter une tache"
-        onPress={() => navigation.navigate('Taches')}/>
-        <Button
-        title="Générer le diagnostic"
-        onPress={() => alert('Diagnostic généré !')}/>
-        <Button
-        title="Génerer la routine d'échauffement"
-        onPress={() => alert('Routine d\'échauffement générée !')}/>
+        <Button 
+            style={{backgroundColor: '#0e87d8'}}
+            textStyle={{fontSize: 20,color:'white'}}
+            onPress={() => navigation.navigate('Métier')}>Ajouter un métier</Button>
+        <Button 
+            style={{backgroundColor: '#0e87d8'}}
+            textStyle={{fontSize: 20,color:'white'}}
+            onPress={() => navigation.navigate('Taches')}>Ajouter une tache</Button>
+        <Button 
+            style={{backgroundColor: '#0e87d8'}}
+            textStyle={{fontSize: 20,color:'white'}}
+            onPress={() => alert('Diagnostic généré')}>Générer le diagnostic</Button>
+        <Button 
+            style={{backgroundColor: '#0e87d8'}}
+            textStyle={{fontSize: 20,color:'white'}}
+            onPress={() => alert('Routine générée')}>Générer la routine d'échauffement</Button>
       </View>
       </View>
     );
@@ -42,6 +71,10 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     },
+  top_container: {
+    height:'10%',
+    flexDirection:'row'
+  },
   centrage: {
     flex:1,
     alignItems: 'center', 
