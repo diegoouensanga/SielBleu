@@ -1,13 +1,8 @@
-import React, { useState, useEffect} from 'react';
-import { Camera } from 'expo-camera';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from 'react';
+
+import { View, StyleSheet, Dimensions } from 'react-native';
+
 import { Button, Image, CheckBox } from 'react-native-elements';
-import LinearGradient from 'react-native-linear-gradient';
-import { AuthSession } from 'expo';
-import {CompanyScreen} from './CompanyScreen'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -27,7 +22,6 @@ export function HomeScreen({ navigation }) {
             onPress={() => navigation.navigate('Entreprise')} />
         </View>
       </View>
-  
     );
 }
 
