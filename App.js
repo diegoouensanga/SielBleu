@@ -1,13 +1,13 @@
-import React, { useState, useEffect} from 'react';
+import React, {Component} from 'react';
 import {StyleSheet, Dimensions} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import {HomeScreen} from './Screens/HomeScreen'
-import {CompanyScreen} from './Screens/CompanyScreen'
-import {JobScreen} from './Screens/JobScreen'
-import {TasksScreen} from './Screens/TasksScreen'
-import {CameraScreen} from './Screens/CameraScreen'
-import {SollicitationsScreen} from './Screens/SollicitationsScreen'
-import {EndScreen} from './Screens/EndScreen'
+import HomeScreen from './Screens/HomeScreen'
+import CompanyScreen from './Screens/CompanyScreen'
+import JobScreen from './Screens/JobScreen'
+import TasksScreen from './Screens/TasksScreen'
+import CameraScreen from './Screens/CameraScreen'
+import SollicitationsScreen from './Screens/SollicitationsScreen'
+import EndScreen from './Screens/EndScreen'
 import { createStackNavigator } from '@react-navigation/stack';
 
 const ThemeYellowColor = '#fbbc2a';
@@ -16,8 +16,9 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const Stack = createStackNavigator();
 
-function App() {
-  return (
+export default class App extends Component {
+  render() {
+    return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Accueil" component={HomeScreen} />
@@ -31,8 +32,9 @@ function App() {
     </NavigationContainer>
   );
 }
+}
 
-export default App;
+
 
 const styles = StyleSheet.create({
   container: {

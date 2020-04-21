@@ -7,7 +7,8 @@ import Button from 'apsl-react-native-button'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export function CompanyScreen({ navigation }) {
+class CompanyScreen extends React.Component {
+  render(){
     return (
     <View style={styles.container}>
         <View style={styles.top_container}>
@@ -65,6 +66,7 @@ export function CompanyScreen({ navigation }) {
     </View>
     );
 }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -99,3 +101,5 @@ const styles = StyleSheet.create({
     marginTop: windowHeight*0.3,
   }
 });
+
+export default CompanyScreen

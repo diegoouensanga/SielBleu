@@ -12,7 +12,8 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-export function CameraScreen({ navigation }) {
+class CameraScreen extends React.Component {
+  render(){
 
     const [hasPermission, setHasPermission] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
@@ -76,7 +77,7 @@ export function CameraScreen({ navigation }) {
       </View>
     );
   }
-
+}
 const styles = StyleSheet.create({
   container: {
     flex:1,
@@ -106,3 +107,5 @@ const styles = StyleSheet.create({
     marginTop: windowHeight*0.3,
   }
 });
+
+export default Camera

@@ -9,7 +9,8 @@ import Button from 'apsl-react-native-button'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export function SollicitationsScreen({ navigation }) {
+class SollicitationsScreen extends React.Component {
+  render(){
     return (
     <View style={styles.container}>
       <View style={styles.top_container}>
@@ -65,7 +66,7 @@ export function SollicitationsScreen({ navigation }) {
     </View>
     );
 }
-
+}
 const styles = StyleSheet.create({
   container: {
     flex:1,
@@ -99,3 +100,5 @@ const styles = StyleSheet.create({
     marginTop: windowHeight*0.3,
   }
 });
+
+export default SollicitationsScreen
