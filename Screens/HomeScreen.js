@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions,ScrollView,Text } from 'react-native';
 
 import { Button, Image, CheckBox } from 'react-native-elements';
 
@@ -10,16 +10,45 @@ const windowHeight = Dimensions.get('window').height;
 export function HomeScreen({ navigation }) {
     return (
       <View style={styles.container}>
-        <View style={styles.logo}>
+        <View style={{backgroundColor:'lightblue',flex: 1, alignItems: 'center'}}>
             <Image
             source={{uri: "https://files.sbcdnsb.com/images/vpli8sqozemg/content/1500372150/298192/100/logssb.gif"}}
             resizeMode = 'cover'
             style={{ width: windowWidth * 0.3, height: windowHeight*0.1 }} />
             <Button 
-            buttonStyle={styles.boutonNew}
-            title="Nouveau Diagnostic"
+            buttonStyle={{backgroundColor: '#0c77bd',marginTop: windowHeight*0.03}}
+            title="Créer un nouveau document"
             type="solid"
-            onPress={() => navigation.navigate('Entreprise')} />
+            onPress={() => navigation.navigate('Entreprise')}
+             />
+        </View>
+
+        <View style={{backgroundColor:'lightgrey',flex:3,justifyContent:'center',alignItems:'center'}}>
+          <Text style={{fontSize:20,marginBottom:windowHeight*0.01}}>Anciens documents : </Text>
+        <ScrollView style={{backgroundColor:'grey',width:windowWidth*0.8,maxHeight:windowHeight*0.4}}>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        <Text>bLfijfeijez</Text>
+        </ScrollView>
         </View>
       </View>
     );
@@ -41,16 +70,9 @@ const styles = StyleSheet.create({
     flex:1,
     flexDirection: 'row'
   },
-  logo: {
-    flex: 1,
-    alignItems: 'center', 
-    marginTop: windowHeight*0.07,
-  },
+  
   boutons: {
     backgroundColor: '#0c77bd',
   },
-  boutonNew: {
-    backgroundColor: '#0c77bd',
-    marginTop: windowHeight*0.3,
-  }
+  
 });
