@@ -6,8 +6,21 @@ import Button from 'apsl-react-native-button'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export function EndScreen({ navigation }) {
-    return (
+class EndScreen extends React.Component {
+  constructor(){
+    super()
+    this.state ={
+        userProfilePic:'require(\'../Images/coolguy.png\')',
+        userPseudo:'Kevin',
+        userLevel:'42',
+        userSpeciality: 'Static',
+        userDomain:'Street-Workout',
+        showSkill:false,
+        showProfile:false
+    }
+}
+    render() {
+      return(
       <View style={styles.container}>
       <View style={styles.top_container}>
           <View style={{width:'20%',padding:5}}>
@@ -64,7 +77,8 @@ export function EndScreen({ navigation }) {
             onPress={() => alert('Routine générée')}>Générer la routine d'échauffement</Button>
       </View>
       </View>
-    );
+    )
+      }
 }
 
 const styles = StyleSheet.create({
@@ -99,4 +113,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#0c77bd',
     marginTop: windowHeight*0.3,
   }
-});
+})
+
+export default EndScreen
