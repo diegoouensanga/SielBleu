@@ -12,7 +12,21 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-export function CameraScreen({ navigation }) {
+class CameraScreen extends React.Component {
+  constructor(){
+    super()
+    this.state ={
+        userProfilePic:'require(\'../Images/coolguy.png\')',
+        userPseudo:'Kevin',
+        userLevel:'42',
+        userSpeciality: 'Static',
+        userDomain:'Street-Workout',
+        showSkill:false,
+        showProfile:false
+    }
+}
+    render() {
+      
 
     const [hasPermission, setHasPermission] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
@@ -74,7 +88,8 @@ export function CameraScreen({ navigation }) {
           </View>
         </Camera>
       </View>
-    );
+    )
+            }
   }
 
 const styles = StyleSheet.create({
@@ -105,4 +120,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#0c77bd',
     marginTop: windowHeight*0.3,
   }
-});
+})
+
+export default CameraScreen
