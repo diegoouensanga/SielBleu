@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, TouchableHighlight } from 'react-native';
 import { Button } from 'react-native-elements';
 
-const MyComponent = ({ navigation }) => (
+const NouveauDoc = ({ navigation }) => (
   
   <Button 
   buttonStyle={{backgroundColor: '#0c77bd'}}
@@ -13,4 +13,4 @@ const MyComponent = ({ navigation }) => (
    />
 );
 
-export default MyComponent;
+export default NouveauDoc;

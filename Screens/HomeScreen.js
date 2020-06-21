@@ -2,10 +2,13 @@ import React from 'react';
 
 import { View, StyleSheet, Dimensions,ScrollView,Text } from 'react-native';
 
-import { Button, Image, CheckBox } from 'react-native-elements';
+import { Button, Image, CheckBox, TextInput } from 'react-native-elements';
 
-import MyComponent from '../Components/MyComponent';
+import NouveauDoc from '../Boutons/NouveauDoc';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
+
+
 
 fetch('http:/192.168.1.33/SielBleu_backend/showEntreprises.php')
     .then((response) => {
@@ -34,9 +37,18 @@ class HomeScreen extends React.Component {
         showProfile:false,
         listeEntreprises:{},
         
+        UserName: '',
+        UserEmail: '',
+        UserPassword: ''
+     
+        
+        
     }
     
 }
+
+
+
 componentDidMount(){
    //une fois que le component est monté, on executé ça
   fetch('http:/192.168.1.33/SielBleu_backend/showEntreprises.php')
@@ -50,7 +62,7 @@ componentDidMount(){
       });
       
   })
-  
+
 }
 
     render() {
@@ -67,27 +79,14 @@ componentDidMount(){
             resizeMode = 'cover'
             style={{ width: windowWidth * 0.3, height: windowHeight*0.1 }} />
             
-             <View style={{marginTop:windowHeight*0.02}}><MyComponent navigation={this.props.navigation}/></View>
+             <View style={{marginTop:windowHeight*0.02}}><NouveauDoc navigation={this.props.navigation}
+             />
+   </View>
         </View>
-
-
-
 
         <View style={{backgroundColor:'lightgrey',flex:3,justifyContent:'center',alignItems:'center'}}>
 
-
-
           <Text style={{fontSize:20,marginBottom:windowHeight*0.01}}>Anciens documents : </Text>
-
-
-
-
-
-
-
-
-
-
 
         <ScrollView style={{backgroundColor:'grey',width:windowWidth*0.8,maxHeight:windowHeight*0.4}}>
 
@@ -122,21 +121,10 @@ componentDidMount(){
             <Text style={{alignSelf:'center',marginBottom:20}}>DATE</Text>
           </View>
         </View>
-
         
-        
-
-
-
-  
         </ScrollView>
 
-
-
         <Text>{(this.state.userPseudoBackend.companyname) ? this.state.userPseudoBackend.companyname : 'Chargement'}</Text>
-
-
-
 
         </View>
       </View>
