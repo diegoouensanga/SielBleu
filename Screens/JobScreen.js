@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Dimensions, Alert } from 'react-native';
 
 import { Image, CheckBox } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
@@ -22,6 +22,27 @@ class JobScreen extends React.Component {
         showSkill:false,
         showProfile:false
     }
+}
+insertInfoMetierAndNav = () =>{
+  fetch('http:/192.168.1.33/SielBleu_backend/add_job_info.php', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      nomMetier: this.state.Read_nomMetier,
+      description: this.state.Read_description,
+
+  })
+  }).then((response) => response.text())
+        .then((responseJson) => {
+  // Showing response message coming from server after inserting records.
+          Alert.alert(responseJson);
+        }).catch((error) => {
+          console.error(error);
+        });
+        this.props.navigation.navigate('TasksScreen');
 }
     render() {
       return(
@@ -59,27 +80,31 @@ class JobScreen extends React.Component {
           </View>
         </View>
         <View style={styles.logo}>
-            <Image
-            source={{uri: "https://files.sbcdnsb.com/images/vpli8sqozemg/content/1500372150/298192/100/logssb.gif"}}
-            resizeMode = 'cover'
-            style={{ width: windowWidth * 0.3, height: windowHeight*0.1 }}/>
+          <Image
+          source={{uri: "https://files.sbcdnsb.com/images/vpli8sqozemg/content/1500372150/298192/100/logssb.gif"}}
+          resizeMode = 'cover'
+          style={{ width: windowWidth * 0.3, height: windowHeight*0.1 }}/>
+          
+          <Text style={{marginTop:80}}>Informations sur l'entreprise</Text>
+  
+  <TextInput
+    placeholder="Entrer le nom du métier"
+    onChangeText={nomMetier => this.setState({Read_nomMetier : nomMetier})}
+    underlineColorAndroid='transparent'
+    style={styles.TextInputStyleClass}
+    />
+    <TextInput
+    placeholder="Entrer une description du métier"
+    onChangeText={description => this.setState({Read_description : description})}
+    underlineColorAndroid='transparent'
+    style={styles.TextInputStyleClass}
+    />
         </View>
-        <View style={{alignItems:'center'}}>
-            <Text >Nom du métier :</Text>
-            <TextInput
-            placeholder='Electricien, Mécanicien...'/>
-        </View>
-        <View style={{alignItems:'center'}}>
-            <Text >Description de l'activité :</Text>
-            <TextInput
-            placeholder='Réparations sur structures électriques...'/>
-        </View>
-        <View style={styles.bouton}>
-        <Button 
-        style={{backgroundColor: '#0c77bd'}}
-        textStyle={{fontSize: 20,color:'white'}}
-        onPress={() => navigation.navigate('Taches')}>Suivant</Button>
-        </View>
+        <View>
+        
+
+  <Button onPress={this.insertInfoMetierAndNav} style={{backgroundColor:'#0c77bd'}} textStyle={{fontSize: 25,color:'white'}}>Suivant</Button> 
+  </View>
     </View>
     )
 }
@@ -116,6 +141,24 @@ const styles = StyleSheet.create({
   boutonNew: {
     backgroundColor: '#0c77bd',
     marginTop: windowHeight*0.3,
+  },
+   
+  TextInputStyleClass: {
+   
+    textAlign: 'center',
+    marginBottom: 7,
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#2196F3',
+    borderRadius: 5 ,
+  },
+  
+  title:{
+  
+    fontSize: 22, 
+    color: "#009688", 
+    textAlign: 'center', 
+    marginBottom: 15
   }
 })
 

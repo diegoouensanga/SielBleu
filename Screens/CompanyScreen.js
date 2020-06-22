@@ -35,19 +35,12 @@ export  function JobScreen({ navigation }) {
 class CompanyScreen extends React.Component {
   constructor(props) {
     super(props)
-    this._createAndNavigate = this._createAndNavigate.bind(this);
-    this._helloWorld = this._helloWorld.bind(this);
-    this._helloWorld2 = this._helloWorld2.bind(this);
-    this._createCompteRendu = this._createCompteRendu.bind(this);
-
     this.state = {
-      Read_id: '',
-      Read_entreprise: '',
-      Read_date_creation: '',
+      ok: '',
     }
   }
 
-  _createCompteRendu = () => {
+  createCompteRenduAndNav = () =>{
     fetch('http:/192.168.1.33/SielBleu_backend/create_compte_rendu.php', {
       method: 'POST',
       headers: {
@@ -55,10 +48,8 @@ class CompanyScreen extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        id: this.state.Read_id,
-        entreprise: this.state.Read_entreprise,
-        date_creation: this.state.Read_date_creation,
-      })
+        nomEntreprise: this.state.Read_nomEntreprise,
+    })
     }).then((response) => response.text())
           .then((responseJson) => {
     // Showing response message coming from server after inserting records.
@@ -66,29 +57,17 @@ class CompanyScreen extends React.Component {
           }).catch((error) => {
             console.error(error);
           });
+          this.props.navigation.navigate('JobScreen');
   }
-  _createAndNavigate= () => {
-    const navigation = useNavigation();
-    this._createCompteRendu();
-    navigation.navigate('JobScreen');
-}
-_helloWorld = ()  => {
-  alert('Hello world!');
-}
 
-_helloWorld2 = () => {
-  this._helloWorld();
-  this._createCompteRendu();
-}
-
-    render() {
-      return(
+  render() {
+    return(
         
     <View style={styles.container}>
         <View style={styles.top_container}>
           <View style={{width:'20%',padding:5}}>
             <Button 
-            style={{backgroundColor: '#0c77bd'}}
+            style={{backgroundColor: '#34a4ed'}}
             textStyle={{fontSize: 13,color:'white'}}
             onPress={() => navigation.navigate('Entreprise')}>Entreprise</Button>
           </View>
@@ -124,24 +103,21 @@ _helloWorld2 = () => {
           resizeMode = 'cover'
           style={{ width: windowWidth * 0.3, height: windowHeight*0.1 }}/>
           
+          <Text style={{marginTop:80}}>Informations sur l'entreprise</Text>
+  
+  <TextInput
+    placeholder="Entrer le nom de l'entreprise"
+    onChangeText={nomEntreprise => this.setState({Read_nomEntreprise : nomEntreprise})}
+    underlineColorAndroid='transparent'
+    style={styles.TextInputStyleClass}
+    />
         </View>
+        <View>
+        
 
-        <View style={{alignItems:'center'}}>
-          <Text >Id</Text>
-          <TextInput
-          placeholder='1234'
-          onChangeText={Read_id => this.setState({id : Read_id})}/>
-          <Text >Date</Text>
-          <TextInput
-          placeholder='12/03/2020'
-          onChangeText={Read_date_creation => this.setState({date_creation : Read_date_creation})}/>
-          <Text >Nom de l'entreprise :</Text>
-          <TextInput
-          placeholder='Safran, Alstom...'
-          onChangeText={Read_entreprise => this.setState({entreprise : Read_entreprise})}/>
-        </View>
-        <Child method={this._helloWorld2} />
-        <EntrepriseToMetier2 method={this._createAndNavigate}/>
+  <Button onPress={this.createCompteRenduAndNav} style={{backgroundColor:'#0c77bd'}} textStyle={{fontSize: 25,color:'white'}}>Suivant</Button> 
+  </View>
+        
     </View>
     )
 }
@@ -177,6 +153,30 @@ const styles = StyleSheet.create({
   boutonNew: {
     backgroundColor: '#0c77bd',
     marginTop: windowHeight*0.3,
+  },
+  MainContainer :{
+ 
+    justifyContent: 'center',
+    flex:1,
+    margin: 10
+  },
+   
+  TextInputStyleClass: {
+   
+    textAlign: 'center',
+    marginBottom: 7,
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#2196F3',
+    borderRadius: 5 ,
+  },
+  
+  title:{
+  
+    fontSize: 22, 
+    color: "#009688", 
+    textAlign: 'center', 
+    marginBottom: 15
   }
 })
 

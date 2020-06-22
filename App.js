@@ -26,7 +26,7 @@ export default class App extends Component {
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="CompanyScreen" component={CompanyScreen} />
         <Stack.Screen name="JobScreen" component={JobScreen} />
-        <Stack.Screen name="EntrepriseToMetier" component={EntrepriseToMetier} />
+       
         
         <Stack.Screen name="TasksScreen" component={TasksScreen} />
         <Stack.Screen name="SollicitationsScreen" component={SollicitationsScreen} />
