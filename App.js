@@ -1,15 +1,6 @@
 import React, { Component } from 'react';
-import {StyleSheet, Dimensions} from 'react-native';
-import { useNavigation, NavigationContainer } from '@react-navigation/native';
-import HomeScreen from './Screens/HomeScreen'
-import CompanyScreen from './Screens/CompanyScreen'
-import JobScreen from './Screens/JobScreen'
-import TasksScreen from './Screens/TasksScreen'
-import CameraScreen from './Screens/CameraScreen'
-import SollicitationsScreen from './Screens/SollicitationsScreen'
-import EndScreen from './Screens/EndScreen'
+import {StyleSheet, Dimensions, View, Text, FlatList, TouchableOpacity,Image} from 'react-native';
 
-import EntrepriseToMetier from './Boutons/EntrepriseToMetier'
 import  {createStackNavigator } from '@react-navigation/stack';
 
 const ThemeYellowColor = '#fbbc2a';
@@ -19,29 +10,69 @@ const windowHeight = Dimensions.get('window').height;
 const Stack = createStackNavigator();
 
 export default class App extends Component {
-  render() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fileList:[]
+    }
+  }
+
+  renderItem = ({item,index}) => {
     return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="CompanyScreen" component={CompanyScreen} />
-        <Stack.Screen name="JobScreen" component={JobScreen} />
-       
-        
-        <Stack.Screen name="TasksScreen" component={TasksScreen} />
-        <Stack.Screen name="SollicitationsScreen" component={SollicitationsScreen} />
-        <Stack.Screen name="CameraScreen" component={CameraScreen} />
-        <Stack.Screen name="EndScreen" component={EndScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+        <View>
+          <Image source={item.url} style={styles.itemImage}/>
+        </View>
+    )
+  
+  };
+
+  render() {
+    let {content, btnPressStyle,txtStyle} = styles;
+    let {fileList} = this.state;
+    return (
+      <View style={content}>
+        <Text>Sample</Text>
+        <FlatList
+        data={fileList}
+        renderItem={this.renderItem}
+        keyExtractor={(item,index) => index.toString()}
+        extraDate={this.state}
+        />
+        <TouchableOpacity style={btnPressStyle}>
+          <Text style={txtStyle}>Press Add Image</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 }
 
-
-
 const styles = StyleSheet.create({
-  container: {
+  content: {
     flex:1,
+    alignItems:'center',
+    marginTop:50,
+    paddingLeft:30,
+    paddingRight:30,
+    marginBottom:30
    },
+   btnPressStyle:{
+     backgroundColor: '#0080ff',
+     height:50,
+     width:windowWidth-60,
+     alignItems:'center',
+     justifyContent:'center'
+   },
+   txtStyle:{
+     color:'#ffffff',
+   },
+   itemImage:{
+     backgroundColor:'#2F455C',
+     height:150,
+     width:windowWidth - 60,
+     borderRadius: 8,
+     resizeMode:'contain' //Scale the image uniformly
+
+
+
+   }
 });

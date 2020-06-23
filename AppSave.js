@@ -8,8 +8,6 @@ import TasksScreen from './Screens/TasksScreen'
 import CameraScreen from './Screens/CameraScreen'
 import SollicitationsScreen from './Screens/SollicitationsScreen'
 import EndScreen from './Screens/EndScreen'
-
-import EntrepriseToMetier from './Boutons/EntrepriseToMetier'
 import  {createStackNavigator } from '@react-navigation/stack';
 
 const ThemeYellowColor = '#fbbc2a';
@@ -26,7 +24,7 @@ export default class App extends Component {
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="CompanyScreen" component={CompanyScreen} />
         <Stack.Screen name="JobScreen" component={JobScreen} />
-        <Stack.Screen name="EntrepriseToMetier" component={EntrepriseToMetier} />
+       
         
         <Stack.Screen name="TasksScreen" component={TasksScreen} />
         <Stack.Screen name="SollicitationsScreen" component={SollicitationsScreen} />

@@ -2,10 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet, Dimensions,Alert } from 'react-native';
 import { Image } from 'react-native-elements';
 import Button from 'apsl-react-native-button'
-import EntrepriseToMetier2 from '../Boutons/EntrepriseToMetier2';
-import NouveauDoc from '../Boutons/NouveauDoc';
-import EntrepriseToMetier from '../Boutons/EntrepriseToMetier';
-import Child from '../Child';
+
 import { useNavigation } from '@react-navigation/native';
 
 

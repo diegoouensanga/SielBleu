@@ -4,9 +4,8 @@ import { View, StyleSheet, Dimensions,ScrollView,Text } from 'react-native';
 
 import { Button, Image, CheckBox, TextInput } from 'react-native-elements';
 
-import NouveauDoc from '../Boutons/NouveauDoc';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import NouveauDoc from '../Boutons/NouveauDoc';
 
 
 
