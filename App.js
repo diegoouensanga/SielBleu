@@ -1,78 +1,149 @@
-import React, { Component } from 'react';
-import {StyleSheet, Dimensions, View, Text, FlatList, TouchableOpacity,Image} from 'react-native';
+import React, { Component } from "react";
 
-import  {createStackNavigator } from '@react-navigation/stack';
+import * as Permissions from 'expo-permissions';
+import * as ImagePicker from 'expo-image-picker';
+import {View, Text, StyleSheet, Dimensions, Image,Modal } from "react-native";
+import Button from 'apsl-react-native-button'
 
-const ThemeYellowColor = '#fbbc2a';
-const ThemeBlueColor = '#0c77bd';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const Stack = createStackNavigator();
 
-export default class App extends Component {
+export default class PhotoPickerScreen extends Component {
+  state = {
+    image: null,
+  };
   constructor(props) {
     super(props);
     this.state = {
-      fileList:[]
+     hasCameraPermission: null,
+     image: null,
+     imageSource: null,
     }
-  }
-
-  renderItem = ({item,index}) => {
-    return (
-        <View>
-          <Image source={item.url} style={styles.itemImage}/>
-        </View>
-    )
-  
+   }
+  _takePicture = async () => {
+    await Permissions.askAsync(Permissions.CAMERA);
+    const { cancelled, uri } = await ImagePicker.launchCameraAsync({
+      allowsEditing: false,
+    });
+    this.setState({ image: uri });
   };
-
-  render() {
-    let {content, btnPressStyle,txtStyle} = styles;
-    let {fileList} = this.state;
-    return (
-      <View style={content}>
-        <Text>Sample</Text>
-        <FlatList
-        data={fileList}
-        renderItem={this.renderItem}
-        keyExtractor={(item,index) => index.toString()}
-        extraDate={this.state}
-        />
-        <TouchableOpacity style={btnPressStyle}>
-          <Text style={txtStyle}>Press Add Image</Text>
-        </TouchableOpacity>
-      </View>
-    );
+   async componentDidMount() {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    this.setState({ hasCameraPermission: status === "granted" });
+   }
+  
+  _getPhotoFromLibrary = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+     allowsEditing: true,
+     aspect: [4, 3]
+    });
+    if (!result.cancelled) {
+     this.setState({ image: result.uri });
+    }
+   }
+   
+ render() {
+  const { image, hasCameraPermission } = this.state;
+  if (hasCameraPermission === null) {
+   return <View />
   }
+  else if (hasCameraPermission === false) {
+   return <Text>Access to camera has been denied.</Text>;
+  }
+  else {
+   return (
+     
+    <View style={{ flex: 1 }}>
+
+{/* GUIDE LINE */}
+
+      <View style={{flex:1}}>
+      <View style={styles.top_container}>
+          <View style={{width:'20%',padding:5}}>
+            <Button 
+            style={{backgroundColor: '#0c77bd'}}
+            textStyle={{fontSize: 13,color:'white'}}
+            onPress={() => navigation.navigate('Entreprise')}>Entreprise</Button>
+          </View>
+          <View style={{width:'19%',padding:5}}>
+            <Button 
+            style={{backgroundColor: '#0c77bd'}}
+            textStyle={{fontSize: 19,color:'white'}}
+            onPress={() => navigation.navigate('Métier')}>Métier</Button>
+          </View>
+          <View style={{width:'19%',padding:5}}>
+            <Button 
+            style={{backgroundColor: '#0c77bd'}}
+            textStyle={{fontSize: 17,color:'white'}}
+            onPress={() => navigation.navigate('Taches')}>Taches</Button>
+          </View>
+          <View style={{width:'20%',padding:5}}>
+            <Button 
+            style={{backgroundColor: '#0c77bd'}}
+            textStyle={{fontSize: 10,color:'white'}}
+            onPress={() => navigation.navigate('Sollicitations')}>Sollicitations</Button>
+          </View>
+          <View style={{width:'21%',padding:5}}>
+            <Button 
+            style={{backgroundColor: '#0c77bd'}}
+            textStyle={{fontSize: 11,color:'white'}}
+            onPress={() => navigation.navigate('Fin')}>Générations documents</Button>
+          </View>
+        </View>
+      </View>
+{/* END GUIDE LINE */}
+
+{/* PHOTO */}
+     <View style={styles.activeImageContainer}>
+
+      {image ? (
+       <Image source={{ uri: image }} style={{ flex: 1, resizeMode:'contain'}} />
+      ) : (
+       <View />
+      )}
+    </View>
+{/* END PHOTO */}
+
+{/* BOUTONS */}
+    <View style={{ flex: 6, alignItems: "center", justifyContent: "center" }}>
+     <Button 
+       onPress={this._getPhotoFromLibrary.bind(this)} 
+       style={{backgroundColor: '#0c77bd'}}
+       textStyle={{fontSize: 20,color:'white'}}
+       >Select image from gallery</Button>
+     <Button 
+        style={{backgroundColor: '#0c77bd'}}
+        textStyle={{fontSize: 20,color:'white'}}
+        onPress={this._takePicture}>Prendre une photo</Button> 
+          <Button 
+        style={{backgroundColor: '#0c77bd'}}
+        textStyle={{fontSize: 20,color:'white'}}
+        onPress={() => navigation.navigate('Sollicitations')}>Sollicitations</Button> 
+          <Button 
+        style={{backgroundColor: '#0c77bd'}}
+        textStyle={{fontSize: 20,color:'white'}}
+        onPress={() => navigation.navigate('Fin')}>Générer les documents</Button>
+    </View>
+{/* END BOUTONS */}
+   </View>
+   
+   );
+  }
+ }
 }
 
 const styles = StyleSheet.create({
-  content: {
-    flex:1,
-    alignItems:'center',
-    marginTop:50,
-    paddingLeft:30,
-    paddingRight:30,
-    marginBottom:30
-   },
-   btnPressStyle:{
-     backgroundColor: '#0080ff',
-     height:50,
-     width:windowWidth-60,
-     alignItems:'center',
-     justifyContent:'center'
-   },
-   txtStyle:{
-     color:'#ffffff',
-   },
-   itemImage:{
-     backgroundColor:'#2F455C',
-     height:150,
-     width:windowWidth - 60,
-     borderRadius: 8,
-     resizeMode:'contain' //Scale the image uniformly
-
-
-
-   }
+ activeImageContainer: {
+  marginLeft:80,
+  flex: 5,
+  width: 200,
+  height: 300,
+  backgroundColor: "#eee",
+  borderBottomWidth: 0.5,
+  borderColor: "#fff"
+ },
+ top_container: {
+  height:'10%',
+  flexDirection:'row'
+},
 });
