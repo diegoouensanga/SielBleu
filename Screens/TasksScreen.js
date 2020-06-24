@@ -2,13 +2,14 @@ import React, { Component } from "react";
 
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
-import {View, Text, StyleSheet, Dimensions, Image } from "react-native";
+import {View, Text, StyleSheet, Dimensions, Image, Alert } from "react-native";
 import Button from 'apsl-react-native-button'
-
+import { useNavigation } from '@react-navigation/native';
+require("json-circular-stringify");
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default class PhotoPickerScreen extends Component {
+export default class TasksScreen extends Component {
   state = {
     image: null,
   };
@@ -19,8 +20,10 @@ export default class PhotoPickerScreen extends Component {
       image: null,
       imageSource: null,
       data: null,
+    
     }
   }
+
   _takePicture = async () => {
     await Permissions.askAsync(Permissions.CAMERA);
     const { cancelled, uri } = await ImagePicker.launchCameraAsync({
@@ -45,6 +48,27 @@ export default class PhotoPickerScreen extends Component {
        });
     }
   }
+  _uploadAndNavToSollicitations = () =>{
+    fetch('http:/192.168.1.33/SielBleu_backend/upload_photo.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        photo: this.state.image,
+    })
+    }).then((response) => response.text())
+          .then((responseJson) => {
+    // Showing response message coming from server after inserting records.
+            Alert.alert(responseJson);
+          }).catch((error) => {
+            console.error(error);
+          });
+          this.props.navigation.navigate('SollicitationsScreen');
+  }
+  
+  
  render() {
   const { image, hasCameraPermission } = this.state;
   if (hasCameraPermission === null) {
@@ -76,7 +100,7 @@ export default class PhotoPickerScreen extends Component {
               </View>
               <View style={{ width: '19%', padding: 5 }}>
                 <Button
-                  style={{ backgroundColor: '#0c77bd' }}
+                  style={{ backgroundColor: '#34a4ed' }}
                   textStyle={{ fontSize: 17, color: 'white' }}
                   onPress={() => navigation.navigate('Taches')}>Taches</Button>
               </View>
@@ -98,6 +122,7 @@ export default class PhotoPickerScreen extends Component {
 
           {/* PHOTO */}
           <View style={styles.activeImageContainer}>
+          
 
             {image ? (
               <Image source={{ uri: image }} style={{ flex: 1, resizeMode: 'contain' }} />
@@ -121,12 +146,8 @@ export default class PhotoPickerScreen extends Component {
             <Button
               style={{ backgroundColor: '#0c77bd' }}
               textStyle={{ fontSize: 20, color: 'white' }}
-             
-            >Upload</Button>
-            <Button
-              style={{ backgroundColor: '#0c77bd' }}
-              textStyle={{ fontSize: 20, color: 'white' }}
-              onPress={() => navigation.navigate('Sollicitations')}>Sollicitations</Button>
+              onPress={this._uploadAndNavToSollicitations}
+            >Upload + Sollicitations</Button>
             <Button
               style={{ backgroundColor: '#0c77bd' }}
               textStyle={{ fontSize: 20, color: 'white' }}

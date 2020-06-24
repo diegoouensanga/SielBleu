@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Alert } from 'react-native';
 
 import { Image } from 'react-native-elements';
 import Button from 'apsl-react-native-button'
@@ -9,22 +9,35 @@ import Button from 'apsl-react-native-button'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default class SollicitationsScreen extends React.Component {
+export default class SollicitationsBras extends React.Component {
   constructor(){
     super()
     this.state ={
-        userProfilePic:'require(\'../Images/coolguy.png\')',
-        userPseudo:'Kevin',
-        userLevel:'42',
-        userSpeciality: 'Static',
-        userDomain:'Street-Workout',
-        showSkill:false,
-        showProfile:false
+      userSollicitation1: 'mouvement blablabla',
     }
 }
+_uploadSollicitation = () =>{
+  fetch('http:/192.168.1.33/SielBleu_backend/add_sollicitation1.php', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      sollicitation: this.state.userSollicitation1,
+  })
+  }).then((response) => response.text())
+        .then((responseJson) => {
+  // Showing response message coming from server after inserting records.
+          Alert.alert(responseJson);
+        }).catch((error) => {
+          console.error(error);
+        });
+        
+}
 
-_NavToSollicitationsBras = () =>{
-  this.props.navigation.navigate('SollicitationsBras');
+_navToEnd = () =>{   
+  this.props.navigation.navigate('EndScreen');
 }
     render() {
       return(
@@ -70,9 +83,9 @@ _NavToSollicitationsBras = () =>{
         <Text>Sollicitations</Text>
         
         <TouchableOpacity 
-        onPress={this._NavToSollicitationsBras}
-        style={{width:100, height:100, backgroundColor:'lightgrey'}}>
-          <Text style={{fontSize: 30, color:'blue'}}>Bras</Text>
+        onPress={this._uploadSollicitation}
+        style={{width:200, height:100, backgroundColor:'lightgrey'}}>
+          <Text style={{fontSize: 10, color:'blue'}}>Mouvements répétitifs de flexion/extension du coude</Text>
         </TouchableOpacity>
 
         <Button 
@@ -82,7 +95,8 @@ _NavToSollicitationsBras = () =>{
         <Button 
         style={{backgroundColor: '#0c77bd'}}
         textStyle={{fontSize: 20,color:'white'}}
-        onPress={() => navigation.navigate('Fin')}>OK</Button>
+        onPress={this._navToEnd}
+        >OK</Button>
       </View>
     </View>
     )

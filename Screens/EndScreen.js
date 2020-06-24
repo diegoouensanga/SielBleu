@@ -6,7 +6,7 @@ import Button from 'apsl-react-native-button'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-class EndScreen extends React.Component {
+export default class EndScreen extends React.Component {
   constructor(){
     super()
     this.state ={
@@ -19,6 +19,7 @@ class EndScreen extends React.Component {
         showProfile:false
     }
 }
+
     render() {
       return(
       <View style={styles.container}>
@@ -49,7 +50,7 @@ class EndScreen extends React.Component {
           </View>
           <View style={{width:'21%',padding:5}}>
             <Button 
-            style={{backgroundColor: '#0c77bd'}}
+            style={{backgroundColor: '#34a4ed'}}
             textStyle={{fontSize: 11,color:'white'}}
             onPress={() => navigation.navigate('Fin')}>Générations documents</Button>
           </View>
@@ -62,7 +63,7 @@ class EndScreen extends React.Component {
         <Button 
             style={{backgroundColor: '#0e87d8'}}
             textStyle={{fontSize: 20,color:'white'}}
-            onPress={() => navigation.navigate('Métier')}>Ajouter un métier</Button>
+            onPress={() => navigation.navigate('Métier')}>Ajouter un métttier</Button>
         <Button 
             style={{backgroundColor: '#0e87d8'}}
             textStyle={{fontSize: 20,color:'white'}}
@@ -114,5 +115,3 @@ const styles = StyleSheet.create({
     marginTop: windowHeight*0.3,
   }
 })
-
-export default EndScreen
