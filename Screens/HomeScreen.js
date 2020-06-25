@@ -109,7 +109,7 @@ class HomeScreen extends React.Component {
 
         <View style={{ backgroundColor: 'lightgrey', flex: 3, justifyContent: 'center', alignItems: 'center' }}>
 
-          <Text style={{ fontSize: 20, marginBottom: windowHeight * 0.01 }}>Anciens documents : </Text>
+          <Text style={{ fontSize: 20, marginBottom: windowHeight * 0.01 }}>Anciens documsents : </Text>
           <View style={styles.activeImageContainer}>
 
             

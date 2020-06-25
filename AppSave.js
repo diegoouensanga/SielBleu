@@ -4,10 +4,9 @@ import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './Screens/HomeScreen'
 import CompanyScreen from './Screens/CompanyScreen'
 import JobScreen from './Screens/JobScreen'
-import displayImage from './Screens/displayImage'
 import TasksScreen from './Screens/TasksScreen'
-import CameraScreen from './Screens/CameraScreen'
 import SollicitationsScreen from './Screens/SollicitationsScreen'
+import SollicitationsBras from './Screens/SollicitationsBras'
 import EndScreen from './Screens/EndScreen'
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -25,10 +24,9 @@ export default class App extends Component {
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="CompanyScreen" component={CompanyScreen} />
           <Stack.Screen name="JobScreen" component={JobScreen} />
-          <Stack.Screen name="displayImage" component={displayImage} />
           <Stack.Screen name="TasksScreen" component={TasksScreen} />
           <Stack.Screen name="SollicitationsScreen" component={SollicitationsScreen} />
-          <Stack.Screen name="CameraScreen" component={CameraScreen} />
+          <Stack.Screen name="SollicitationsBras" component={SollicitationsBras} />
           <Stack.Screen name="EndScreen" component={EndScreen} />
         </Stack.Navigator>
       </NavigationContainer>

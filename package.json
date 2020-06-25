@@ -20,6 +20,7 @@
     "expo-media-library": "^8.0.0",
     "expo-permissions": "^8.0.0",
     "json-circular-stringify": "^1.0.1",
+    "jspdf": "^1.5.3",
     "native-base": "^2.13.12",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
